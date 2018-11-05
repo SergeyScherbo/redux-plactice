@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Person from './components/person';
+import AddPerson from './components/addPerson';
 
 class App extends Component {
+  state = {
+    people: [
+      { name: 'Sergey', age: 24, gender: 'male' },
+      { name: 'Alice', age: 22, gender: 'female' },
+      { name: 'Diana', age: 18, gender: 'female' }
+    ]
+  }
+
+  handleAddPerson = person => e => {
+    e.preventDefault();
+    this.setState(state => ({ people: [...state.people, person] }));
+  }
+
+  handleRemovePerson = name => e => {
+    this.setState(state => ({ people: state.people.filter(person => person.name !== name) }));
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1>My fifth React app!</h1>
+        <p>Hey there :)</p>
+        {
+          this.state.people.map(person => {
+            return <Person key={person.name} name={person.name} age={person.age} gender={person.gender} onRemovePerson={this.handleRemovePerson} />
+          })
+        }
+        <AddPerson onAddPerson={this.handleAddPerson} />
       </div>
     );
   }
