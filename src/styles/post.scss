@@ -1,0 +1,23 @@
+.post {
+	padding: 15px;
+	border: 1px solid #ccc;
+	transition: .3s;
+
+	&:not(:last-of-type) {
+		margin-bottom: 20px;
+	}
+
+	&:hover {
+		box-shadow: 0 3px 5px 2px fade-out(#000, .9);
+	}
+
+	&__heading {
+		font-size: 1.15rem;
+		margin-bottom: 10px;
+		font-weight: 500;
+		
+		&:first-letter {
+			text-transform: uppercase;
+		}
+	}
+}
